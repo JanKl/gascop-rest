@@ -1,7 +1,9 @@
+import { DbLineInterface } from "./DbLineInterface";
+
 /**
  * Holds the data of a POCSAG message (called page in gascop).
  */
-export class MessagePage {
+export class MessagePage implements DbLineInterface {
     /**
      * 0 for new entries, gascop will set this to 1 as soon as it is processing the entry
      * Allowed values: 0 and 1
