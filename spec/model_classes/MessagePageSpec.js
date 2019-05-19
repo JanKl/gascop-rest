@@ -1,4 +1,3 @@
-/// <reference path="../../node_modules/@types/jasmine/index.d.ts" />
 var Jasmine = require("jasmine");
 var MessagePage = require("../../build/MessagePage").MessagePage;
 
