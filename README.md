@@ -8,5 +8,5 @@ The original software had been made between 2010 and 2014 by Clive Cooper and wa
 After cloning the contents of this repository, install all dependencies
     npm install
 Now that this is done, compile the typescript to javascript. There are different scripts for Unix and Windows OSes:
-    npm build  // For Unix systems
+    npm run build  // For Unix systems
     npm run buildWindowsPS  // For Windows systems, PowerShell is required
