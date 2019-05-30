@@ -10,3 +10,6 @@ After cloning the contents of this repository, install all dependencies
 Now that this is done, compile the typescript to javascript. There are different scripts for Unix and Windows OSes:
     npm run build  // For Unix systems
     npm run buildWindowsPS  // For Windows systems, PowerShell is required
+To run the script, execute
+    npm start
+The service will now listen on port 1234

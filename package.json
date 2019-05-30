@@ -4,10 +4,11 @@
   "description": "A REST interface for the gascop POCSAG paging system",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p build && rm -rf build/* && cp src_js/* build && npm run tsc",
+    "build": "mkdir -p build && rm -rf build/* && cp -r src_js/* build && npm run tsc",
     "buildWindowsPS": "rd -r build; mkdir build; cp src_js/* build; npm run tsc",
     "test": "ts-node node_modules/jasmine/bin/jasmine",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "start": "node ./build/bin/www"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,12 @@
     "ts-node": "^8.1.0"
   },
   "dependencies": {
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
   }
 }
