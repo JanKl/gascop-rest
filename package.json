@@ -4,6 +4,8 @@
   "description": "A REST interface for the gascop POCSAG paging system",
   "main": "index.js",
   "scripts": {
+    "build": "mkdir -p build && rm -rf build/* && cp src_js/* build && npm run tsc",
+    "buildWindowsPS": "rd -r build; mkdir build; cp src_js/* build; npm run tsc",
     "test": "ts-node node_modules/jasmine/bin/jasmine",
     "tsc": "tsc"
   },
