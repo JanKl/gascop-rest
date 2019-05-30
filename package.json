@@ -8,7 +8,7 @@
     "buildWindowsPS": "rd -r build; mkdir build; cp src_js/* build; npm run tsc",
     "test": "ts-node node_modules/jasmine/bin/jasmine",
     "tsc": "tsc",
-    "start": "node ./build/bin/www"
+    "start": "PORT=1234 node ./build/bin/www"
   },
   "repository": {
     "type": "git",
