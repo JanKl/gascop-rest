@@ -121,7 +121,21 @@ export abstract class DbInterface extends EventEmitter {
 
     private appendEntryToDatabaseFile(dbLine: DbLineInterface): boolean {
         try {
-            fs.appendFileSync(this.pathToDbFile, dbLine.toDbString() + "\n");
+            // Find out whether there are already entries present in the file.
+            // Only prepend a newline if there are other entries.
+            var areEntriesPresent = false;
+
+            try {
+                let fileStats = fs.statSync(this.pathToDbFile);
+                areEntriesPresent = fileStats.size > 0;
+            } catch (e) { }
+
+            let newlineCharacterIfEntriesPresent = "";
+            if (areEntriesPresent) {
+                newlineCharacterIfEntriesPresent = "\n";
+            }
+
+            fs.appendFileSync(this.pathToDbFile, newlineCharacterIfEntriesPresent + dbLine.toDbString());
             return true;
         } catch (e) {
             console.error("Could not append entry to database " + this.pathToDbFile, e);
