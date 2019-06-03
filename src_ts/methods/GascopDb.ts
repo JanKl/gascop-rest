@@ -1,5 +1,6 @@
 import { DbInterface } from "./DbInterface";
 import { ConfigObj } from "../interfaces/ConfigObj";
+import path from "path";
 
 var config: ConfigObj = require('../../config.json');
 
@@ -32,7 +33,7 @@ export class GascopDb extends DbInterface {
         let pathToGascopDb = config.absolutePathToGascopDb;
 
         if (pathToGascopDb.slice(-9) != "gascop.db") {
-            pathToGascopDb += "gascop.db";
+            pathToGascopDb = path.join(pathToGascopDb, "gascop.db");
         }
 
         this.pathToDbFile = pathToGascopDb;
