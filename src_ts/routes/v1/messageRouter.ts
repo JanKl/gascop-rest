@@ -18,7 +18,7 @@ router.post('/',
     check('numeric').isBoolean(),
     check('functionBits').isNumeric(),
     check('ric').isNumeric(),
-    check('msg').isAlphanumeric()
+    check('msg').isString()
   ],
   function (req: any, res: any, _next: any) {
     const errors = validationResult(req);
