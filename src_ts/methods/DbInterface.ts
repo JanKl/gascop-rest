@@ -1,4 +1,4 @@
-import fs = require('fs');
+import fs from 'fs';
 import { DbLineInterface } from './DbLineInterface';
 import { EventEmitter } from 'events';
 

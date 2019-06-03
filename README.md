@@ -5,7 +5,9 @@ This tool was created out of the motivation to enable a connection to Gascop via
 The original software had been made between 2010 and 2014 by Clive Cooper and was published on http://winpe.com/gascop/.
 
 ## Installation
-After cloning the contents of this repository, install all dependencies
+After cloning the contents of this repository, you need to provide the script with a configuration file. A sample configuration file can be found in the project's root directory by the name of `config.example.json`. Rename the file to `config.json` and set the absolute path to the Gascop DB file.
+
+Install all dependencies
 ```
 npm install
 ```
@@ -18,4 +20,4 @@ To run the script, execute
 ```
 npm start
 ```
-The service will now listen on port 1234
+The service will now listen on port 1234. Open http://your-server:1234 in a browser to see the GUI of the web interface.

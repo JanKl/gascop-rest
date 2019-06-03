@@ -1,2 +1,18 @@
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="javascripts/sendMessage.js"></script>
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<p>Welcome to the GASCOP web interface.</p>
+<p>Send a message:</p>
+<form id="sendMessage">
+    <label for="tx">TX channel:</label>
+    <input id="tx" type="number" min="0" max="7"><br>
+    <label for="baud">Baud rate:</label>
+    <input id="baud" type="number" min="512" max="2400"><br>
+    <label for="ric">RIC:</label>
+    <input id="ric" type="number" min="1" max="2097152"><br>
+    <label for="functionBits">Function bits:</label>
+    <input id="functionBits" type="number" min="0" max="3"><br>
+    <label for="msg">Message:</label>
+    <input id="msg" type="text"><br>
+    <input type="submit" value="Send now">
+</form>

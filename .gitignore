@@ -89,3 +89,6 @@ typings/
 
 # Exclude JS build dir
 build/
+
+# Exclude config file
+config.json
