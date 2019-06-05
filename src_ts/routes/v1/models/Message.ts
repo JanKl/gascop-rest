@@ -147,7 +147,7 @@ export class Message {
     public static FromObject(source: MessageObj): Message {
         var messageObject = new Message();
 
-        messageObject.flag = source["flag"];
+        messageObject.flag = source["flag"] == true || source["flag"] == "true";
 
         if (source["sendTime"] == "") {
             messageObject.sendTime = new Date(0);
@@ -163,7 +163,7 @@ export class Message {
         messageObject.howMany = source["howMany"];
         messageObject.tx = source["tx"];
         messageObject.baud = source["baud"];
-        messageObject.numeric = source["numeric"];
+        messageObject.numeric = source["numeric"] == true || source["numeric"] == "true";
         messageObject.functionBits = source["functionBits"];
         messageObject.ric = source["ric"];
         messageObject.msg = source["msg"];
