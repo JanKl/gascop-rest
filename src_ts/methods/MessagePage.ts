@@ -11,7 +11,7 @@ export class MessagePage implements DbLineInterface {
     public flag: number;
 
     /**
-     * Seconds since epoch when to send the message
+     * Seconds since epoch when to send the message. This timestamp is local time.
      */
     public sendTime: number;
 
