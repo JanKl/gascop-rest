@@ -1,3 +1,37 @@
 {
-    "absolutePathToGascopDb": "/path/to/gascop.db"
+    "absolutePathToGascopDb": "/path/to/gascop.db",
+    "predefinedMessages": [
+        "This is an alarm"
+    ],
+    "predefinedPagers": [
+        {
+            "groupName": "Group 1",
+            "pagers": [
+                {
+                    "baudRate": 512,
+                    "functionBit": 3,
+                    "guiName": "Pager 1",
+                    "ric": 12345,
+                    "txChannel": 1
+                },
+                {
+                    "baudRate": 1200,
+                    "functionBit": 0,
+                    "guiName": "Pager 2",
+                    "ric": 54321,
+                    "txChannel": 2
+                }
+            ]
+        }
+    ],
+    "cyclicAlarms": [
+        {
+            "baudRate": 512,
+            "functionBit": 3,
+            "message": "",
+            "ric": 12321,
+            "txChannel": 1,
+            "repeatEveryMinutes": 5
+        }
+    ]
 }
