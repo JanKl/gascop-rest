@@ -43,7 +43,7 @@ export class MessagePage implements DbLineInterface {
 
     /**
      * The channel to use for transmission
-     * Allowed values: 0 - 7 (XXX: in the gascop GUI values from 1 to 8 are used)
+     * Allowed values: 1 - 8
      */
     public tx: number;
 

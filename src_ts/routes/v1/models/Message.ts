@@ -62,17 +62,17 @@ export class Message {
         this._howMany = value;
     }
 
-    private _tx: number = 0;
+    private _tx: number = 1;
     get tx(): number {
         return this._tx;
     }
     set tx(value: number) {
-        if (value < 0) {
-            value = 0;
+        if (value < 1) {
+            value = 1;
         }
 
-        if (value > 7) {
-            value = 7;
+        if (value > 8) {
+            value = 8;
         }
 
         this._tx = value;
