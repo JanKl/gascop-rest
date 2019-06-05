@@ -123,15 +123,16 @@ export abstract class DbInterface extends EventEmitter {
         try {
             // Find out whether there are already entries present in the file.
             // Only prepend a newline if there are other entries.
-            var areEntriesPresent = false;
+            var databaseCurrentContents = "";
 
             try {
-                let fileStats = fs.statSync(this.pathToDbFile);
-                areEntriesPresent = fileStats.size > 0;
-            } catch (e) { }
+                databaseCurrentContents = fs.readFileSync(this.pathToDbFile).toString();
+            } catch (e) {
+                console.error("Could not read contents from database. If the file does not exist, this is not an error.", e);
+            }
 
             let newlineCharacterIfEntriesPresent = "";
-            if (areEntriesPresent) {
+            if (databaseCurrentContents.length > 0 && databaseCurrentContents.slice(-1) != "\n") {
                 newlineCharacterIfEntriesPresent = "\n";
             }
 
