@@ -5,5 +5,5 @@ export interface ConfigObj {
     absolutePathToGascopDb: string;
     predefinedMessages: Array<string>;
     predefinedPagers: Array<ConfigPredefinedPagerGroup>
-    CyclicAlarms: Array<ConfigCyclicAlarm>
+    cyclicAlarms: Array<ConfigCyclicAlarm>
 }
