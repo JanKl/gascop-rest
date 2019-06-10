@@ -4,8 +4,8 @@
   "description": "A REST interface for the gascop POCSAG paging system",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p build && rm -rf build/* && cp -r src_js/* build && npm run tsc",
-    "buildWindowsPS": "rd -r build; mkdir build; cp src_js/* build; npm run tsc",
+    "build": "mkdir -p build && rm -rf build/* && cp -r src_js/* build && cp node_modules/jquery/dist/jquery.min.js build/public/javascripts/jquery.min.js && cp node_modules/popper.js/dist/umd/popper.min.js build/public/javascripts/popper.min.js && cp node_modules/bootstrap/dist/js/bootstrap.min.js build/public/javascripts/bootstrap.min.js && cp node_modules/bootstrap/dist/css/bootstrap.min.css build/public/stylesheets/bootstrap.min.css && npm run tsc",
+    "buildWindowsPS": "rd -r build; mkdir build; cp -R src_js/* build; cp node_modules/jquery/dist/jquery.min.js build/public/javascripts/jquery.min.js; cp node_modules/popper.js/dist/umd/popper.min.js build/public/javascripts/popper.min.js; cp node_modules/bootstrap/dist/js/bootstrap.min.js build/public/javascripts/bootstrap.min.js; cp node_modules/bootstrap/dist/css/bootstrap.min.css build/public/stylesheets/bootstrap.min.css; npm run tsc",
     "test": "ts-node node_modules/jasmine/bin/jasmine",
     "tsc": "tsc",
     "start": "PORT=1234 node ./build/bin/www"
@@ -28,13 +28,16 @@
     "ts-node": "^8.1.0"
   },
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-validator": "^5.3.1",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
+    "jquery": "^3.4.1",
     "morgan": "~1.9.1",
+    "popper.js": "^1.15.0",
     "typescript": "^3.4.5"
   }
 }
