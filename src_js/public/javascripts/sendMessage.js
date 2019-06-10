@@ -126,6 +126,8 @@ var chooseRecipients = (function () {
         let functionBits = parseInt($predefinedPager.find("input[name='functionBits']").val());
 
         sendMessageSummary.addRecipient(guiName, tx, baud, ric, functionBits);
+
+        afterSubmitFocusNextInputField();
     }
 
     function onFormSubmit(event) {
@@ -169,6 +171,7 @@ var chooseMessages = (function () {
 
     exports.initialize = function () {
         $('#chooseMessages').submit(onFormSubmit);
+        $('#chooseMessages button[type="reset"]').click(onFormReset);
         $("#predefinedMessagesContainer").hide();
 
         loadPredefinedMessages();
@@ -214,7 +217,7 @@ var chooseMessages = (function () {
 
         // There is a maximum entries count per column. Find out if the maximum
         // is reached and create a new column in that case.
-        let maximumEntriesPerColumn = 6;
+        let maximumEntriesPerColumn = 5;
         let lastListGroup = $("#predefinedMessages > .col").last().find(".list-group");
         let lastColumnEntriesCount = lastListGroup.children().length;
 
@@ -248,6 +251,8 @@ var chooseMessages = (function () {
         let msg = $(this).text();
         sendMessageSummary.setMessage(msg);
         $("#msg").val(msg);
+
+        afterSubmitFocusNextInputField();
     }
 
     function onFormSubmit(event) {
@@ -258,6 +263,17 @@ var chooseMessages = (function () {
         sendMessageSummary.setMessage(msg);
 
         afterSubmitFocusNextInputField();
+    }
+
+    function onFormReset(event) {
+        event.preventDefault();
+
+        resetForm();
+    }
+
+    function resetForm() {
+        sendMessageSummary.setMessage("");
+        $("#msg").val("");
     }
 
     function afterSubmitFocusNextInputField() {
@@ -278,7 +294,7 @@ var sendMessageSummary = (function () {
         $('#sendMessageSummary').submit(onFormSubmit);
         $('#sendMessageSummaryReset').click(onFormReset);
 
-        updateSendButtonActivity();
+        updateSubmitButtonActivity();
     }
 
     exports.addRecipient = function (guiName, tx, baud, ric, functionBits) {
@@ -321,7 +337,7 @@ var sendMessageSummary = (function () {
         $hiddenFunctionBits.val(functionBits);
         $recipientButton.append($hiddenFunctionBits);
 
-        updateSendButtonActivity();
+        updateSubmitButtonActivity();
     }
 
     exports.setMessage = function (messageToSet) {
@@ -369,6 +385,7 @@ var sendMessageSummary = (function () {
         .done(function() {
             alert("The message has been enqueued.");
             resetForm();
+            afterSubmitFocusNextInputField();
         })
         .fail(function() {
             alert("At least one recipient failed.");
@@ -385,22 +402,26 @@ var sendMessageSummary = (function () {
         $("#pagersToNotify").empty();
         $("#textToSend").val("");
 
-        updateSendButtonActivity();
+        updateSubmitButtonActivity();
     }
 
     function onRecipientClicked(event) {
         event.preventDefault();
 
         $(this).parent().remove();
-        updateSendButtonActivity();
+        updateSubmitButtonActivity();
     }
 
     function isSendPossible() {
         return $("#pagersToNotify li").length > 0;
     }
 
-    function updateSendButtonActivity() {
+    function updateSubmitButtonActivity() {
         $('#sendMessageSummarySubmit').prop("disabled", !isSendPossible());
+    }
+
+    function afterSubmitFocusNextInputField() {
+        $("#ric").focus();
     }
 
     exports.isSendPossible = isSendPossible;
