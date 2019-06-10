@@ -9,14 +9,14 @@
             "pagers": [
                 {
                     "baudRate": 512,
-                    "functionBit": 3,
+                    "functionBits": 3,
                     "guiName": "Pager 1",
                     "ric": 12345,
                     "txChannel": 1
                 },
                 {
                     "baudRate": 1200,
-                    "functionBit": 0,
+                    "functionBits": 0,
                     "guiName": "Pager 2",
                     "ric": 54321,
                     "txChannel": 2

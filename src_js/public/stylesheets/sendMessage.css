@@ -1,0 +1,35 @@
+body {
+    margin: 1em;
+}
+
+.deleteIcon {
+    color: #cc0000;
+}
+
+.addIcon {
+    color: #00cc00;
+}
+
+.list-inline {
+    display: inline;
+}
+
+.predefinedRecipientsContainer,
+.predefinedMessagesContainer {
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0.25rem;
+    padding: 0.5em;
+    margin-top: 0.5em;
+}
+
+.list-group-item-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: 5px solid rgba(0, 0, 0, 0.1);
+}
