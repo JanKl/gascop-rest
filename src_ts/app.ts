@@ -1,4 +1,5 @@
 import { CyclicAlarmWatchdog } from "./methods/CyclicAlarmWatchdog";
+import { ConfigValidator } from "./methods/ConfigValidator";
 
 var createError = require('http-errors');
 var express = require('express');
@@ -13,7 +14,12 @@ var v1predefinedPager = require('./routes/v1/predefinedPagerRouter');
 
 var app = express();
 
-// Start cyclic alarm background job
+// Check config and setup watchdog
+if (!ConfigValidator.IsConfigValid()) {
+  console.error("The configuration file has errors. Terminating.");
+  process.exit(1);
+}
+
 let _cyclicAlarmWatchdog = new CyclicAlarmWatchdog();
 
 // view engine setup
