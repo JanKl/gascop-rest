@@ -178,18 +178,11 @@ var chooseMessages = (function () {
     }
 
     function loadPredefinedMessages() {
-        // TODO: Load real data
-        let predefinedMessages = [
-            "Message 1",
-            "Message 2",
-            "Message 3",
-            "Message 4",
-            "Message 5",
-            "Message 6",
-            "Message 7"
-        ];
-
-        showPredefinedMessages(predefinedMessages);
+        $.get("v1/predefinedMessage/")
+        .done(showPredefinedMessages)
+        .fail(function (error) {
+            console.error("Could not retrieve predefined messages", error);
+        });
     }
 
     function showPredefinedMessages(data) {
