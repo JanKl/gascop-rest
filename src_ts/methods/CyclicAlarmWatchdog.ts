@@ -32,12 +32,9 @@ export class CyclicAlarmWatchdog extends EventEmitter {
         let minutes = Math.floor(now.getTime() / 1000 / 60);
 
         if (!isNaN(this.lastCheckedMinute) && this.lastCheckedMinute == minutes) {
-            console.log("Skipping check (lastChecked is " + this.lastCheckedMinute + " and now we have " + minutes + ")");
             // Already checked for this minute. Skipping
             return;
         }
-
-        console.log("Checking (lastChecked is " + this.lastCheckedMinute + " and now we have " + minutes + ")");
 
         this.lastCheckedMinute = minutes;
 
@@ -45,11 +42,8 @@ export class CyclicAlarmWatchdog extends EventEmitter {
             let cyclicAlarm = config.cyclicAlarms[i];
 
             if (minutes % cyclicAlarm.repeatEveryMinutes != 0) {
-                console.log("Cyclic message " + cyclicAlarm.message + " " + cyclicAlarm.ric + "/" + cyclicAlarm.functionBits + " – CH" + cyclicAlarm.txChannel + "@" + cyclicAlarm.baudRate + "Bd. is not due (due every " + cyclicAlarm.repeatEveryMinutes + " minutes and now we have " + minutes + ")");
                 continue;
             }
-
-            console.log("Sending cyclic message " + cyclicAlarm.message + " " + cyclicAlarm.ric + "/" + cyclicAlarm.functionBits + " – CH" + cyclicAlarm.txChannel + "@" + cyclicAlarm.baudRate + "Bd. (due every " + cyclicAlarm.repeatEveryMinutes + " minutes and now we have " + minutes + ")");
 
             let messageToSend = new Message();
             messageToSend.baud = cyclicAlarm.baudRate;
