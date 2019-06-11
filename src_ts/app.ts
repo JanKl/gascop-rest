@@ -9,6 +9,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/indexRouter');
 var v1messageRouter = require('./routes/v1/messageRouter');
 var v1predefinedMessage = require('./routes/v1/predefinedMessageRouter');
+var v1predefinedPager = require('./routes/v1/predefinedPagerRouter');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/v1/message', v1messageRouter);
 app.use('/v1/predefinedMessage', v1predefinedMessage);
+app.use('/v1/predefinedPager', v1predefinedPager);
 
 // catch 404 and forward to error handler
 app.use(function(_req: any, _res: any, next: any) {

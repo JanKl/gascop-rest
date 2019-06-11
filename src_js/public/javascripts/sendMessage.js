@@ -12,42 +12,11 @@ var chooseRecipients = (function () {
     }
 
     function loadPredefinedPagers() {
-        // TODO: Load real data
-        let predefinedPagers = [
-            {
-                "groupName": "Group 1",
-                "pagers": [
-                    {
-                        "baudRate": 512,
-                        "functionBits": 3,
-                        "guiName": "Pager 1",
-                        "ric": 12345,
-                        "txChannel": 1
-                    },
-                    {
-                        "baudRate": 1200,
-                        "functionBits": 0,
-                        "guiName": "Pager 2",
-                        "ric": 54321,
-                        "txChannel": 2
-                    }
-                ]
-            },
-            {
-                "groupName": "Group 2",
-                "pagers": [
-                    {
-                        "baudRate": 2400,
-                        "functionBits": 2,
-                        "guiName": "Pager 3",
-                        "ric": 12,
-                        "txChannel": 1
-                    }
-                ]
-            }
-        ];
-
-        showPredefinedPagerGroups(predefinedPagers);
+        $.get("v1/predefinedPager/")
+        .done(showPredefinedPagerGroups)
+        .fail(function (error) {
+            console.error("Could not retrieve predefined pagers", error);
+        });
     }
 
     function showPredefinedPagerGroups(data) {
