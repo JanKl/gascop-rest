@@ -10,11 +10,15 @@ export class ConfigValidator {
             return false;
         }
 
+        if (!this.ArePredefinedMessagesValid()) {
+            return false;
+        }
+
         return true;
     }
 
     private static IsPathToGascopDbValid(): boolean {
-        if (typeof config.absolutePathToGascopDb === "undefined") {
+        if (typeof config.absolutePathToGascopDb !== "string") {
             console.error("The path to the Gascop database is not set.");
             return false;
         }
@@ -34,6 +38,26 @@ export class ConfigValidator {
             console.debug("Dummy lock file write and delete failed", error);
             console.error("The folder of the Gascop database is not writable.");
             return false;
+        }
+
+        return true;
+    }
+
+    private static ArePredefinedMessagesValid(): boolean {
+        if (typeof config.predefinedMessages !== "object") {
+            console.error("The predefined messages are not set. Please use at least an empty array.");
+            return false;
+        }
+
+        if (config.predefinedMessages.length == 0) {
+            return true;
+        }
+
+        for (let i = 0; i < config.predefinedMessages.length; ++i) {
+            if (typeof config.predefinedMessages[i] !== "string") {
+                console.error("The predefined message at index " + i + " is not a valid string.");
+                return false;
+            }
         }
 
         return true;
