@@ -4,6 +4,20 @@
 <script src="javascripts/sendMessage.js"></script>
 <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
 <link rel="stylesheet" href="/stylesheets/sendMessage.css">
+<div id="alertContainer"></div>
+<div class="modal fade" id="sendingModal" tabindex="-1" role="dialog" aria-labelledby="sendingModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sendingModalLabel">Trying to enqueue message</h5>
+            </div>
+            <div class="modal-body">
+                Please wait while the message is being enqueued.
+            </div>
+        </div>
+    </div>
+</div>
 <form id="chooseRecipients">
     <h4>1. Choose recipient(s)</h4>
     <div id="manualRecipient" class="form-row">

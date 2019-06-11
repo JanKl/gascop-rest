@@ -33,3 +33,15 @@ hr {
     margin-bottom: 2rem;
     border-top: 5px solid #566573;
 }
+
+.alert {
+    text-align: center;
+}
+
+#alertContainer {
+    position: fixed;
+    width: 50%;
+    z-index: 999;
+    left: 50%;
+    transform: translate(-50%, 0);
+}

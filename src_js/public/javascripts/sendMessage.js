@@ -13,10 +13,10 @@ var chooseRecipients = (function () {
 
     function loadPredefinedPagers() {
         $.get("v1/predefinedPager/")
-        .done(showPredefinedPagerGroups)
-        .fail(function (error) {
-            console.error("Could not retrieve predefined pagers", error);
-        });
+            .done(showPredefinedPagerGroups)
+            .fail(function (error) {
+                console.error("Could not retrieve predefined pagers", error);
+            });
     }
 
     function showPredefinedPagerGroups(data) {
@@ -103,7 +103,7 @@ var chooseRecipients = (function () {
         event.preventDefault();
 
         if (!isSubmitPossible()) {
-            alert("Please enter a valid RIC.");
+            alerts.displayAlert("danger", "Please enter a valid RIC.", 4000);
             return;
         }
 
@@ -148,10 +148,10 @@ var chooseMessages = (function () {
 
     function loadPredefinedMessages() {
         $.get("v1/predefinedMessage/")
-        .done(showPredefinedMessages)
-        .fail(function (error) {
-            console.error("Could not retrieve predefined messages", error);
-        });
+            .done(showPredefinedMessages)
+            .fail(function (error) {
+                console.error("Could not retrieve predefined messages", error);
+            });
     }
 
     function showPredefinedMessages(data) {
@@ -272,7 +272,7 @@ var sendMessageSummary = (function () {
 
         $deleteIcon = $("<span></span>");
         $deleteIcon.addClass("deleteIcon");
-        $deleteIcon.html("&nbsp;&nbsp;X");
+        $deleteIcon.html("&nbsp;&nbsp;&times;");
         $recipientButton.append($deleteIcon);
 
         let $hiddenTx = $("<input></input>");
@@ -310,9 +310,11 @@ var sendMessageSummary = (function () {
         event.preventDefault();
 
         if (!isSendPossible()) {
-            alert("Cannot send without recipients being present!");
+            alerts.displayAlert("danger", "Cannot send without recipients being present!", 4000);
             return;
         }
+
+        sendingModal.showModal();
 
         let messageToSend = $("#textToSend").text();
         let recipients = $("#pagersToNotify").children();
@@ -344,14 +346,20 @@ var sendMessageSummary = (function () {
         }
 
         $.when.apply($, postPromises)
-        .done(function() {
-            alert("The message has been enqueued.");
-            resetForm();
-            afterSubmitFocusNextInputField();
-        })
-        .fail(function() {
-            alert("At least one recipient failed.");
-        });
+            .done(function (response) {
+                console.log(response);
+
+                alerts.displayAlert("success", "The message '" + $('#textToSend').text() + "' has been enqueued.", 7000);
+
+                resetForm();
+                afterSubmitFocusNextInputField();
+            })
+            .fail(function () {
+                alerts.displayAlert("danger", "The message '" + $('#textToSend').text() + "' could not be enqueued. At least one recipient failed.", 7000);
+            })
+            .always(function () {
+                sendingModal.hideModal();
+            });
     };
 
     function onFormReset(event) {
@@ -387,6 +395,119 @@ var sendMessageSummary = (function () {
     }
 
     exports.isSendPossible = isSendPossible;
+
+    return exports;
+})();
+
+var alerts = (function () {
+    var exports = {};
+
+    /**
+     * Displays an alert.
+     * @param context Is one of the eight contextual classes provided by bootstrap.
+     * @param message Is a string containing the message to display
+     * @param timeout Is the number milliseconds after which the alert should be deleted from the DOM.
+     * @returns void
+     */
+    exports.displayAlert = function (context, message, timeout) {
+        let $alertDiv = $("<div></div>");
+        $alertDiv.addClass("alert alert-" + context + " fade show");
+        $alertDiv.prop("role", "alert");
+        $alertDiv.text(message);
+
+        $("#alertContainer").append($alertDiv);
+
+        setTimeout(function () {
+            $alertDiv.alert('close');
+        }, timeout);
+    }
+
+    return exports;
+})();
+
+var sendingModal = (function () {
+    var exports = {};
+
+    var isModalInitialized = false;
+
+    var isModalInTransitionToShow = false;
+    var isModalInTransitionToHide = false;
+    var isModalVisible = false;
+
+    exports.showModal = function () {
+        initialize();
+
+        $('#sendingModal').modal({
+            "backdrop": "static",
+            "keyboard": false
+        });
+    }
+
+    exports.hideModal = function () {
+        if (!isModalVisible) {
+            // Modal is already invisible, perfect!
+            return;
+        }
+
+        if (isModalInTransitionToHide) {
+            // Modal is already becoming invisible.
+            return;
+        }
+
+        if (isModalInTransitionToShow) {
+            // Wait for the transition to complete and then hide the modal
+            $('#sendingModal').on('shown.bs.modal', function (event) {
+                $('#sendingModal').modal('hide');
+            });
+            return;
+        }
+
+        // Hide the modal now
+        $('#sendingModal').modal('hide');
+    }
+
+    function initialize() {
+        if (isModalInitialized) {
+            return;
+        }
+
+        isModalInitialized = true;
+
+        $("#sendingModal").on("show.bs.modal", onShowBsModal);
+        $("#sendingModal").on("shown.bs.modal", onShownBsModal);
+        $("#sendingModal").on("hide.bs.modal", onHideBsModal);
+        $("#sendingModal").on("hidden.bs.modal", onHiddenBsModal);
+    }
+
+    /**
+     * Is triggered when the show method is called.
+     */
+    function onShowBsModal() {
+        isModalInTransitionToShow = true;
+        isModalVisible = true;
+    }
+
+    /**
+     * Is triggered when the show CSS transition has completed.
+     */
+    function onShownBsModal() {
+        isModalInTransitionToShow = false;
+    }
+
+    /**
+     * Is triggered when the hide method is called.
+     */
+    function onHideBsModal() {
+        isModalInTransitionToHide = true;
+    }
+
+    /**
+     * Is triggered when the hide CSS transition has completed.
+     */
+    function onHiddenBsModal() {
+        isModalInTransitionToHide = false;
+        isModalVisible = false;
+    }
 
     return exports;
 })();
