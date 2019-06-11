@@ -4,8 +4,7 @@
   "description": "A REST interface for the gascop POCSAG paging system",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p build && rm -rf build/* && cp -r src_js/* build && cp node_modules/jquery/dist/jquery.min.js build/public/javascripts/jquery.min.js && cp node_modules/popper.js/dist/umd/popper.min.js build/public/javascripts/popper.min.js && cp node_modules/bootstrap/dist/js/bootstrap.min.js build/public/javascripts/bootstrap.min.js && cp node_modules/bootstrap/dist/css/bootstrap.min.css build/public/stylesheets/bootstrap.min.css && npm run tsc",
-    "buildWindowsPS": "rd -r build; mkdir build; cp -R src_js/* build; cp node_modules/jquery/dist/jquery.min.js build/public/javascripts/jquery.min.js; cp node_modules/popper.js/dist/umd/popper.min.js build/public/javascripts/popper.min.js; cp node_modules/bootstrap/dist/js/bootstrap.min.js build/public/javascripts/bootstrap.min.js; cp node_modules/bootstrap/dist/css/bootstrap.min.css build/public/stylesheets/bootstrap.min.css; npm run tsc",
+    "build": "node build.js",
     "test": "ts-node node_modules/jasmine/bin/jasmine",
     "tsc": "tsc",
     "start": "PORT=1234 node ./build/bin/www"
@@ -38,6 +37,7 @@
     "jquery": "^3.4.1",
     "morgan": "~1.9.1",
     "popper.js": "^1.15.0",
+    "shelljs": "^0.8.3",
     "typescript": "^3.4.5"
   }
 }

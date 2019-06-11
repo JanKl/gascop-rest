@@ -7,16 +7,15 @@ The original software had been made between 2010 and 2014 by Clive Cooper and wa
 ## Installation
 Node.js and NPM are required for this project to run. The script has been tested with Node version 12.3.1.
 
-After cloning the contents of this repository, you need to provide the script with a configuration file. A sample configuration file can be found in the project's root directory by the name of `config.example.json`. Rename the file to `config.json` and set the absolute path to the Gascop DB file.
+After cloning the contents of this repository, you need to provide the script with a configuration file. A sample configuration file can be found in the project's root directory by the name of `config.example.json`. Rename the file to `config.json` and update the settings according to your needs.
 
 Install all dependencies
 ```
 npm install
 ```
-Now that this is done, compile the typescript to javascript. There are different scripts for Unix and Windows OSes:
+Now that this is done, compile the TypeScript to JavaScript
 ```
-npm run build  // For Unix systems
-npm run buildWindowsPS  // For Windows systems, PowerShell is required
+npm run build
 ```
 To run the script, execute
 ```
