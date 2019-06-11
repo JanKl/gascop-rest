@@ -1,3 +1,5 @@
+import { CyclicAlarmWatchdog } from "./methods/CyclicAlarmWatchdog";
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -8,6 +10,9 @@ var indexRouter = require('./routes/indexRouter');
 var v1messageRouter = require('./routes/v1/messageRouter');
 
 var app = express();
+
+// Start cyclic alarm background job
+let _cyclicAlarmWatchdog = new CyclicAlarmWatchdog();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
