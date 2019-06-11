@@ -20,6 +20,10 @@ export class ConfigValidator {
             return false;
         }
 
+        if (!this.AreCyclicAlarmsValid()) {
+            return false;
+        }
+
         return true;
     }
 
@@ -177,6 +181,83 @@ export class ConfigValidator {
             return false;
         }
 
+
+        return true;
+    }
+
+    private static AreCyclicAlarmsValid(): boolean {
+        if (typeof config.cyclicAlarms !== "object") {
+            console.error("The cyclic alarms are not set. Please use at least an empty array.");
+            return false;
+        }
+
+        if (config.cyclicAlarms.length == 0) {
+            return true;
+        }
+
+        for (let cyclicAlarmLineId = 0; cyclicAlarmLineId < config.cyclicAlarms.length; ++cyclicAlarmLineId) {
+            if (typeof config.cyclicAlarms[cyclicAlarmLineId] !== "object") {
+                console.error("The cyclic alarm at index " + cyclicAlarmLineId + " is not a valid object.");
+                return false;
+            }
+
+            let cyclicAlarm = config.cyclicAlarms[cyclicAlarmLineId];
+
+            if (typeof cyclicAlarm.baudRate !== "number") {
+                console.error("The information 'baudRate' of cyclic alarm at index " + cyclicAlarmLineId + " is not a valid number.");
+                return false;
+            }
+
+            if (cyclicAlarm.baudRate != 512 && cyclicAlarm.baudRate != 1200 && cyclicAlarm.baudRate != 2400) {
+                console.error("The information 'baudRate' of cyclic alarm at index " + cyclicAlarmLineId + " must be one of 512, 1200, 2400.");
+                return false;
+            }
+    
+    
+            if (typeof cyclicAlarm.functionBits !== "number") {
+                console.error("The information 'functionBits' of cyclic alarm at index " + cyclicAlarmLineId + " is not a valid number.");
+                return false;
+            }
+    
+            if (cyclicAlarm.functionBits < 0 || cyclicAlarm.functionBits > 3) {
+                console.error("The information 'functionBits' of cyclic alarm at index " + cyclicAlarmLineId + " must be between 0 and 3.");
+                return false;
+            }
+
+
+            if (typeof cyclicAlarm.message !== "string") {
+                console.error("The information 'guiName' of cyclic alarm at index " + cyclicAlarmLineId + " is not a valid string.");
+                return false;
+            }
+
+
+            if (typeof cyclicAlarm.repeatEveryMinutes !== "number") {
+                console.error("The information 'repeatEveryMinutes' of cyclic alarm at index " + cyclicAlarmLineId + " is not a valid number.");
+                return false;
+            }
+    
+    
+            if (typeof cyclicAlarm.ric !== "number") {
+                console.error("The information 'ric' of cyclic alarm at index " + cyclicAlarmLineId + " is not a valid number.");
+                return false;
+            }
+    
+            if (cyclicAlarm.ric < 1 || cyclicAlarm.ric > 2097152) {
+                console.error("The information 'ric' of cyclic alarm at index " + cyclicAlarmLineId + " must be between 1 and 2097152.");
+                return false;
+            }
+    
+    
+            if (typeof cyclicAlarm.txChannel !== "number") {
+                console.error("The information 'txChannel' of cyclic alarm at index " + cyclicAlarmLineId + " is not a valid number.");
+                return false;
+            }
+    
+            if (cyclicAlarm.txChannel < 1 || cyclicAlarm.txChannel > 8) {
+                console.error("The information 'txChannel' of cyclic alarm at index " + cyclicAlarmLineId + " must be between 1 and 8.");
+                return false;
+            }
+        }
 
         return true;
     }
