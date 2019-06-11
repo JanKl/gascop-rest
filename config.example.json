@@ -27,7 +27,7 @@
     "cyclicAlarms": [
         {
             "baudRate": 512,
-            "functionBit": 3,
+            "functionBits": 3,
             "message": "",
             "ric": 12321,
             "txChannel": 1,
