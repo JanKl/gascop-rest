@@ -17,8 +17,5 @@ Now that this is done, compile the TypeScript to JavaScript
 ```
 npm run build
 ```
-To run the script, execute
-```
-npm start
-```
+To run the script, execute either `npm start` for a one time start or `node_modules/pm2/bin/pm2 start` to keep the script running and have it restarted if an error should occur.
 The service will now listen on port 1234. Open http://your-server:1234 in a browser to see the GUI of the web interface. Remember to also have your Gascop instance running.
