@@ -38,7 +38,7 @@
     "morgan": "~1.9.1",
     "pm2": "^3.5.1",
     "popper.js": "^1.15.0",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.5",
     "typescript": "^3.4.5"
   }
 }
